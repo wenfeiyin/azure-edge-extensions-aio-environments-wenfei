@@ -177,7 +177,9 @@ jobs:
 
         echo "Creating keyvault..."
         kvId=$(az keyvault create -n $kvName -g $resourceGroup -o tsv --no-self-perms --query id -o tsv)
+        echo "Set keyvault policy ${{ secrets.AZURE_SP_OBJECT_ID }}"
         az keyvault set-policy -n $kvName -g $resourceGroup --object-id ${{ secrets.AZURE_SP_OBJECT_ID }} --secret-permissions all --key-permissions all --storage-permissions all --certificate-permissions all
+        echo "Set keyvault policy $principalId"
         az keyvault set-policy -n $kvName -g $resourceGroup --object-id $principalId --secret-permissions all --key-permissions all --storage-permissions all --certificate-permissions all
         
         echo "Encode secret for security reasons..."
