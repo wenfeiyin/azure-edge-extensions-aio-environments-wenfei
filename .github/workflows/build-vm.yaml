@@ -140,8 +140,8 @@ jobs:
         principalId="$(az identity show --name $vmIdentityName -g $resourceGroup --query principalId -o tsv)"
 
         echo "Creating role assignment for $vmIdentityName (principalId: $principalId)..."
-        az role assignment create --assignee-object-id $principalId --assignee-principal-type ServicePrincipal --role "Owner" --scope /subscriptions/$subscriptionId
-        az role assignment create --assignee-object-id $principalId --assignee-principal-type ServicePrincipal --role "Owner" --scope /subscriptions/$subscriptionId/resourceGroups/$resourceGroup
+        az role assignment create --assignee-object-id $principalId --assignee-principal-type ServicePrincipal --role "Contributor" --scope /subscriptions/$subscriptionId
+        az role assignment create --assignee-object-id $principalId --assignee-principal-type ServicePrincipal --role "Contributor" --scope /subscriptions/$subscriptionId/resourceGroups/$resourceGroup
 
         echo "Creating VM..."
         az vm create \
